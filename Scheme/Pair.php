@@ -1,5 +1,5 @@
 <?php
-class Scheme_Pair implements Scheme_Form {
+class Scheme_Pair implements Scheme_Form, Scheme_ListVal {
     public $car;
     public $cdr;
     
@@ -7,5 +7,19 @@ class Scheme_Pair implements Scheme_Form {
         $this->car = $car;
         $this->cdr = $cdr;
     }
+    
+    public function listToArray() {
+        $result = array();
+        $p = $this;
+        while (true) {
+            if ($p instanceof Scheme_Null) {
+                return $result;
+            } elseif ($p instanceof Scheme_Pair) {
+                $result[] =  $p->car;
+                $p = $p->cdr;
+            } else {
+                throw new Scheme_Error("Expected a list but didn't end in null");
+            }
+        }
+    }
 }
-
