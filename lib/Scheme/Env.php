@@ -19,6 +19,12 @@ class Scheme_Env {
         $this->vars[$var] = $binding;
     }
     
+    public function bindAll(array $bindings) {
+        foreach ($bindings as $key => $value) {
+            $this->bind($key, $value);
+        }
+    }
+    
     public function get($var) {
         $e = $this;
         while ($e != null) {

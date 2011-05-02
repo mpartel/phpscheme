@@ -1,7 +1,6 @@
 <?php
 class Scheme_Parser {
     public function parse($input) {
-        echo $input . "\n";
         $input = trim($input);
         $input = preg_replace("/[\t\n]+/", " ", $input);
         if (preg_match("/^[0-9]+$/", $input)) {

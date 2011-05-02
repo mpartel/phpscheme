@@ -10,30 +10,42 @@ function my_autoload($name) {
 
 spl_autoload_register('my_autoload');
 
-new Scheme_Pair(new Scheme_Symbol("Hei"), new Scheme_Null);
 $parser = new Scheme_Parser();
 
 function testParser($a, $b) {
     $parser = new Scheme_Parser();
     if ($parser->parse($a)->toString() != $b) {
         $x = $parser->parse($a)->toString();
-        echo "VIRHE: $a   ->   $b   ($x)\n";
+        echo "ERROR: $a   ->   $x   (expected $b)\n";
     } else {
-        echo "OK: $a   ->   $b\n";
+        echo "OK:    $a   ->   $b\n";
     }
 }
 
-//echo $parser->parse("(* (+ 1 9) (+ 5 2))");
+function testInterpreter($code, $expected, array $envVars = array()) {
+    
+    $rootEnv = new Scheme_Env();
+    
+    $lib = new Scheme_Lib_Math();
+    $lib->bindToEnv($rootEnv);
+    
+    $rootEnv->bindAll($envVars);
+    
+    $parser = new Scheme_Parser();
+    $expr = $parser->parse($code);
+    
+    $interpreter = new Scheme_Interpreter();
+    $result = $interpreter->evaluate($rootEnv, $expr);
+    
+    $result = $result->toString();
+    if ($result != $expected) {
+        echo "VIRHE: $code   ->   $result   (expected $expected)\n";
+    } else {
+        echo "OK:    $code   ->   $result\n";
+    }
+}
+
 testParser("(* (+ 1 9) (+ 5 2))", "(* (+ 1 9) (+ 5 2))");
-
-$parser = new Scheme_Parser();
-$interpreter = new Scheme_Interpreter();
-$rootEnv = new Scheme_Env();
-$lib = new Scheme_Lib_Math();
-$lib->bindToEnv($rootEnv);
-$rootEnv->bind('x', new Scheme_Int(3));
-$expr = $parser->parse("(+ x 10)");
-echo "\n\n---\n\n";
-$result = $interpreter->evaluate($rootEnv, $expr);
-echo $result->toString() . "\n";
-
+testInterpreter("(+ x 10)", "13", array('x' => new Scheme_Int(3)));
+testInterpreter("(+ x x)", "6", array('x' => new Scheme_Int(3)));
+testInterpreter("(+ (+ x x) (+ 2 2))", "10", array('x' => new Scheme_Int(3)));
