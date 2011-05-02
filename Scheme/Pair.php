@@ -22,4 +22,14 @@ class Scheme_Pair implements Scheme_Form, Scheme_ListVal {
             }
         }
     }
+
+    public function toString() {
+        $parts = $this->listToArray();
+        $result = "";
+        foreach ($parts as $part) {
+            if ($result <> "") $result .= " ";
+            $result .= $part->toString();
+        }
+        return "(" . $result . ")";
+    }
 }
