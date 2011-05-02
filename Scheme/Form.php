@@ -1,3 +1,5 @@
 <?php
-interface Scheme_Form {}
+interface Scheme_Form {
+    public function toString();
+}
 
