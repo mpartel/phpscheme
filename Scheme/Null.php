@@ -1,5 +1,5 @@
 <?php
-class Scheme_Null implements Scheme_Form, Scheme_ListVal {
+class Scheme_Null implements Scheme_Value, Scheme_ListVal {
     public function __construct() {
     }
     

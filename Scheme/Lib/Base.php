@@ -8,7 +8,7 @@ abstract class Scheme_Lib_Base extends Scheme_PhpLibrary {
     }
     
     /**
-     * @param array|Scheme_form $vals
+     * @param array|Scheme_Value $vals
      */
     protected function requireInt($vals) {
         foreach ((array)$vals as $val) {

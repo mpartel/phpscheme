@@ -1,9 +1,9 @@
 <?php
-class Scheme_Pair implements Scheme_Form, Scheme_ListVal {
+class Scheme_Pair implements Scheme_Value, Scheme_ListVal {
     public $car;
     public $cdr;
     
-    public function __construct(Scheme_Form $car, Scheme_Form $cdr) {
+    public function __construct(Scheme_Value $car, Scheme_Value $cdr) {
         $this->car = $car;
         $this->cdr = $cdr;
     }

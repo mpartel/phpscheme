@@ -4,7 +4,7 @@ class Scheme_Lambda implements Scheme_SpecialForm {
     public $body;
     private $argNames;
     
-    public function __construct(Scheme_Env $env, Scheme_Value $argList, Scheme_Form $body) {
+    public function __construct(Scheme_Env $env, Scheme_Value $argList, Scheme_Value $body) {
         $this->env = $env;
         $this->body = $body;
         $this->argNames = $argList->listToString();

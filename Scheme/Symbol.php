@@ -1,5 +1,5 @@
 <?php
-class Scheme_Symbol implements Scheme_Form {
+class Scheme_Symbol implements Scheme_Value {
     public $name;
     
     public function __construct($name) {

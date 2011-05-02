@@ -1,5 +1,5 @@
 <?php
-class Scheme_PhpCallback implements Scheme_Form {
+class Scheme_PhpCallback implements Scheme_Value {
     private $callback;
     
     public function __construct($callback) {

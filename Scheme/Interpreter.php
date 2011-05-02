@@ -1,7 +1,7 @@
 <?php
 class Scheme_Interpreter {
     
-    public function evaluate(Scheme_Env $env, Scheme_Form $value) {
+    public function evaluate(Scheme_Env $env, Scheme_Value $value) {
         $nextApplication = array($env, $value);
         while (is_array($nextApplication)) {
             if ($value instanceof Scheme_Symbol) {
@@ -20,7 +20,7 @@ class Scheme_Interpreter {
         }
     }
     
-    private function getApplication(Scheme_Env $env, Scheme_Form $value, array $args) {
+    private function getApplication(Scheme_Env $env, Scheme_Value $value, array $args) {
         $value = $this->evaluate($env, $value);
         //FIXME special forms and tail recursion
         //FIXME application represenation uglyness
@@ -37,7 +37,7 @@ class Scheme_Interpreter {
         }
     }
     
-    private function apply(Scheme_Env $env, Scheme_Form $value, array $args) {
+    private function apply(Scheme_Env $env, Scheme_Value $value, array $args) {
         $value = $this->evaluate($env, $value);
         if ($value instanceof Scheme_PhpCallback) {
             $args = $this->evaluateEach($env, $args);

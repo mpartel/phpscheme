@@ -1,5 +1,5 @@
 <?php
-class Scheme_Float implements Scheme_Form {
+class Scheme_Float implements Scheme_Value {
     public $value;
     
     public function __construct($value) {
