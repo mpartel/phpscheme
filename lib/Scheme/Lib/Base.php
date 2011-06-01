@@ -13,7 +13,8 @@ abstract class Scheme_Lib_Base extends Scheme_PhpLibrary {
     protected function requireInt($vals) {
         foreach ((array)$vals as $val) {
             if (!($val instanceof Scheme_Int)) {
-                throw new Scheme_Error("Integer required but '$val' given");
+                $valStr = $val->toString();
+                throw new Scheme_Error("Integer required but '$valStr' given");
             }
         }
     }

@@ -1,13 +1,13 @@
 #!/usr/bin/env watchr
 require 'fileutils'
 
-FileUtils.cd File.dirname(__FILE__)
+FileUtils.cd File.dirname(File.dirname(__FILE__))
 
 def run_tests
     system("clear")
-    system("php runtests.php")
+    system("php tests/runtests.php")
 end
 
-watch('../.*\.php') { run_tests }
+watch('.*\.php') { run_tests }
 run_tests
 
