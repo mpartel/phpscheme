@@ -15,11 +15,8 @@ class InterpreterTest extends TestCase {
         $this->interp = new Scheme_InterpreterWithMetrics();
         $this->rootEnv = $this->interp->createEnv();
         
-        $lib = new Scheme_Lib_Base();
+        $lib = new Scheme_Lib_Predef();
         $lib->bindToEnv($this->rootEnv);
-        $lib = new Scheme_Lib_Math();
-        $lib->bindToEnv($this->rootEnv);
-        
     }
     
     

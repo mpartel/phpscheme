@@ -33,8 +33,7 @@ class TestRunner_Scheme extends TestRunner_Php {
     }
     
     private function bindLibs(Scheme_Env $env) {
-        $this->bindLib($env, 'Scheme_Lib_Base');
-        $this->bindLib($env, 'Scheme_Lib_Math');
+        $this->bindLib($env, 'Scheme_Lib_Predef');
         $this->bindLib($env, 'TestRunner_Scheme_AssertionLib');
     }
     
