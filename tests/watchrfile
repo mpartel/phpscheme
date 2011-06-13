@@ -8,6 +8,6 @@ def run_tests
     system("php tests/runtests.php")
 end
 
-watch('.*\.php') { run_tests }
+watch('.*\.php|.*\.test\.ss') { run_tests }
 run_tests
 

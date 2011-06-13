@@ -18,6 +18,7 @@ abstract class Scheme_PhpLibrary {
         foreach ($refl->getMethods(ReflectionMethod::IS_PUBLIC) as $m) {
             $result[] = $m->getName();
         }
+        $result = array_diff($result, array('bindToEnv'));
         return $result;
     }
     

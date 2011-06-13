@@ -11,12 +11,12 @@ class Scheme_Interpreter {
     public function evaluate(Scheme_Env $env, Scheme_Value $expr) {
         while (true) {
             if ($expr instanceof Scheme_Symbol) {
-                return $env->get($expr->name);
+                return $env->get($expr->value);
             } elseif ($expr instanceof Scheme_Pair) {
                 $result = $this->apply($env, $expr->car, $expr->cdr->listToArray());
                 if ($result instanceof Scheme_TailCall) {
-                    $env = $result->env;
                     $expr = $result->expr;
+                    $env = $result->env !== null ? $result->env : $env;
                 } else {
                     assert('$result instanceof Scheme_Value');
                     return $result;

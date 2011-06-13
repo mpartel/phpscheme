@@ -7,6 +7,11 @@ class ParserTest extends TestCase {
         $this->assertParsesAsSame("*");
     }
     
+    public function testSpecialCharsInConstants() {
+        $this->assertParsesAsSame("one-two-three");
+        $this->assertParsesAsSame("is-that-so?");
+    }
+    
     public function testExpressions() {
         $this->assertParsesAsSame("(* (+ 1 9) (+ 5 2))");
     }

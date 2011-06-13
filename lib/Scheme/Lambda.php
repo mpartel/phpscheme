@@ -22,7 +22,7 @@ class Scheme_Lambda implements Scheme_SpecialForm {
             $value = $interp->evaluate($execEnv, $args[$i]);
             $bodyEnv->bind($this->argNames[$i], $value);
         }
-        return new Scheme_TailCall($bodyEnv, $this->body);
+        return new Scheme_TailCall($this->body, $bodyEnv);
     }
     
     public function toString() {

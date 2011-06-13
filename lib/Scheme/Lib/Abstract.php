@@ -31,6 +31,12 @@ abstract class Scheme_Lib_Abstract extends Scheme_PhpLibrary {
         }
     }
     
+    protected function requireString(Scheme_Value $arg) {
+        if (!($arg instanceof Scheme_String)) {
+            throw new Scheme_Error("Expected a string but got " . $arg->toString());
+        }
+    }
+    
     /**
      * @param array|Scheme_Value $vals
      */

@@ -1,10 +1,10 @@
 <?php
 class Scheme_TailCall {
-    public $env;
     public $expr;
+    public $env;
     
-    public function __construct(Scheme_Env $env, Scheme_Value $expr) {
-        $this->env = $env;
+    public function __construct(Scheme_Value $expr, Scheme_Env $env = null) {
         $this->expr = $expr;
+        $this->env = $env;
     }
 }

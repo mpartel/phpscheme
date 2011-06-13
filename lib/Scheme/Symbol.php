@@ -1,12 +1,12 @@
 <?php
 class Scheme_Symbol implements Scheme_Value {
-    public $name;
+    public $value;
     
-    public function __construct($name) {
-        $this->name = $name;
+    public function __construct($value) {
+        $this->value = $value;
     }
 
     public function toString() {
-        return $this->name;
+        return $this->value;
     }
 }
