@@ -38,7 +38,7 @@ class Scheme_Parser {
             return new Scheme_Symbol($input);
         }
         if ($input[0] == "'") {
-            return new Scheme_Pair(new Scheme_Symbol("quote"), parse(substr($input, 1)));
+            return new Scheme_Pair(new Scheme_Symbol("quote"), new Scheme_Pair($this->parse(substr($input, 1)), new Scheme_Null()));
         }
         if (preg_match("/^\(.*\)$/", $input)) {
             if (strlen($input) == 2) {

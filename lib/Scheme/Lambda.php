@@ -1,27 +1,28 @@
 <?php
 class Scheme_Lambda implements Scheme_SpecialForm {
-    public $env;
-    public $body;
+    private $defnEnv;
     private $argNames;
+    private $body;
     
-    public function __construct(Scheme_Env $env, Scheme_Value $argList, Scheme_Value $body) {
-        $this->env = $env;
+    public function __construct(Scheme_Env $defnEnv, array $argNames, Scheme_Value $body) {
+        $this->defnEnv = $defnEnv;
+        $this->argNames = $argNames;
         $this->body = $body;
-        $this->argNames = $argList->listToString();
     }
     
-    public function makeActivation(Scheme_Env $execEnv, array $args) {
-        //TODO: variable number of args
+    public function evaluate(Scheme_Env $execEnv, array $args) {
         if (count($args) != count($this->argNames)) {
             throw new Scheme_Error("Expected " . count($this->argNames) . " but got " . count($args));
         }
         $argCount = count($this->argNames);
 
-        $actEnv = new Scheme_Env($this->env);
+        $interp = $execEnv->getInterpreter();
+        $bodyEnv = $this->defnEnv->createChildEnv();
         for ($i = 0; $i < $argCount; ++$i) {
-            $actEnv->bind($this->argNames[$i], $args[$i]);
+            $value = $interp->evaluate($execEnv, $args[$i]);
+            $bodyEnv->bind($this->argNames[$i], $value);
         }
-        return array($actEnv, $this->body);
+        return new Scheme_TailCall($bodyEnv, $this->body);
     }
     
     public function toString() {

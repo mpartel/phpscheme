@@ -1,17 +1,18 @@
 <?php
 class Scheme_PhpSpecialFormCallback implements Scheme_SpecialForm {
     private $callback;
+    private $name;
     
-    public function __construct($callback) {
+    public function __construct($callback, $name = null) {
         $this->callback = $callback;
+        $this->name = $name;
     }
     
-    public function makeActivation(Scheme_Env $execEnv, array $args) {
-        array_unshift($execEnv, $args);
-        return call_user_func_array($this->callback, $args);
+    public function evaluate(Scheme_Env $env, array $args) {
+        return call_user_func($this->callback, $env, $args);
     }
     
     public function toString() {
-        return "<special form>";
+        return $this->name ? "<special form `$this->name`>" : "<special form>";
     }
 }

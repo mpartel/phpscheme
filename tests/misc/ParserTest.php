@@ -11,6 +11,10 @@ class ParserTest extends TestCase {
         $this->assertParsesAsSame("(* (+ 1 9) (+ 5 2))");
     }
     
+    public function testQuote() {
+        $this->assertParsesAs("'(1 2 3)", "(quote (1 2 3))");
+    }
+    
     private function assertParsesAsSame($s) {
         $this->assertParsesAs($s, $s);
     }
@@ -19,7 +23,7 @@ class ParserTest extends TestCase {
         $parser = new Scheme_Parser();
         if ($parser->parse($given)->toString() != $expected) {
             $s = $parser->parse($given)->toString();
-            throw new Exception("ERROR: $given   ->   $s   (expected $expected)\n");
+            throw new Exception("ERROR: `$given`   ->   `$s`   (expected `$expected`)\n");
         }
     }
 }

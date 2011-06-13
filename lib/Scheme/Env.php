@@ -1,15 +1,25 @@
 <?php
 class Scheme_Env {
+    private $interpreter;
     private $parent;
     private $vars;
     
-    public function __construct(Scheme_Env $parent = null) {
+    public function __construct(Scheme_Interpreter $interpreter, Scheme_Env $parent = null) {
+        $this->interpreter = $interpreter;
         $this->parent = $parent;
         $this->vars = array();
     }
     
     public function getParentEnv() {
         return $this->parent;
+    }
+    
+    public function getInterpreter() {
+        return $this->interpreter;
+    }
+    
+    public function createChildEnv() {
+        return new Scheme_Env($this->interpreter, $this);
     }
     
     public function bind($var, $binding) {

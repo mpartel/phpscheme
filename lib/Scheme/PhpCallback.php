@@ -1,9 +1,11 @@
 <?php
 class Scheme_PhpCallback implements Scheme_Value {
     private $callback;
+    private $name;
     
-    public function __construct($callback) {
+    public function __construct($callback, $name = null) {
         $this->callback = $callback;
+        $this->name = $name;
     }
     
     public function evaluate(array $args) {
@@ -11,6 +13,6 @@ class Scheme_PhpCallback implements Scheme_Value {
     }
     
     public function toString() {
-        return "<library function>";
+        return $this->name ? "<builtin func `$this->name`>" : "<builtin func>";
     }
 }
