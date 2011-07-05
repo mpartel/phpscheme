@@ -26,4 +26,8 @@ class TestRunner_Scheme_AssertionLib extends Scheme_Lib_Abstract {
             return parent::mapMethodName($methodName);
         }
     }
+    
+    protected function getSpecialFormMethods() {
+        return array('assert_equals');
+    }
 }
