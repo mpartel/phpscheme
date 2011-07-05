@@ -21,4 +21,17 @@ class Scheme_Lib_List extends Scheme_Lib_Abstract {
         $this->requireExactly(1, $args);
         return new Scheme_Bool($args[0] instanceof Scheme_Null);
     }
+    
+    public function map(array $args, Scheme_Env $env) {
+        $this->requireExactly(2, $args);
+        $this->requireList($args[1]);
+        list($func, $list) = $args;
+        
+        $interp = $env->getInterpreter();
+        $result = array();
+        foreach ($list->listToArray() as $value) {
+            $result[] = $interp->evaluate($env, Scheme_Utils::mkList($func, $value));
+        }
+        return Scheme_Utils::arrayToList($result);
+    }
 }
