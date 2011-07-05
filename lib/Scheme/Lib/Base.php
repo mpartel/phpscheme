@@ -1,12 +1,12 @@
 <?php
 class Scheme_Lib_Base extends Scheme_Lib_Abstract {
     
-    public function quote(Scheme_Env $env, array $args) {
+    public function quote(array $args, Scheme_Env $env) {
         $this->requireExactly(1, $args);
         return $args[0];
     }
     
-    public function letrec(Scheme_Env $env, array $args) {
+    public function letrec(array $args, Scheme_Env $env) {
         $this->requireExactly(2, $args);
         $bindings = $args[0];
         $body = $args[1];
@@ -35,7 +35,7 @@ class Scheme_Lib_Base extends Scheme_Lib_Abstract {
         return new Scheme_TailCall($body, $newEnv);
     }
     
-    public function lambda(Scheme_Env $env, array $args) {
+    public function lambda(array $args, Scheme_Env $env) {
         $this->requireAtLeast(2, $args);
         $argList = $args[0];
         $body = $args[1];

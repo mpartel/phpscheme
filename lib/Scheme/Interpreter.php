@@ -33,9 +33,9 @@ class Scheme_Interpreter {
             return $value->evaluate($env, $args);
         } elseif ($value instanceof Scheme_PhpCallback) {
             $args = $this->evaluateEach($env, $args);
-            return $value->evaluate($args);
+            return $value->evaluate($env, $args);
         } else {
-            throw new Scheme_Error("Invalid application - " . $value->toString());
+            throw new Scheme_Error("Not a callable value: " . $value->toString());
         }
     }
     

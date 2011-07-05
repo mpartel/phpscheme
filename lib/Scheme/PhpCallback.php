@@ -8,8 +8,8 @@ class Scheme_PhpCallback implements Scheme_Value {
         $this->name = $name;
     }
     
-    public function evaluate(array $args) {
-        return call_user_func($this->callback, $args);
+    public function evaluate(Scheme_Env $env, array $args) {
+        return call_user_func($this->callback, $args, $env);
     }
     
     public function toString() {

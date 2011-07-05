@@ -9,7 +9,7 @@ class Scheme_PhpSpecialFormCallback implements Scheme_SpecialForm {
     }
     
     public function evaluate(Scheme_Env $env, array $args) {
-        return call_user_func($this->callback, $env, $args);
+        return call_user_func($this->callback, $args, $env);
     }
     
     public function toString() {

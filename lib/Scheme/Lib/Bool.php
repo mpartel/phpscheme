@@ -1,7 +1,7 @@
 <?php
 class Scheme_Lib_Bool extends Scheme_Lib_Abstract {
     
-    public function ifStmt(Scheme_Env $env, array $args) {
+    public function ifStmt(array $args, Scheme_Env $env) {
         if (count($args) === 2) {
             $args[] = new Scheme_Unspecified();
         }
