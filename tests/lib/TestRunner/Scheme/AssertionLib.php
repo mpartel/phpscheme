@@ -8,7 +8,7 @@ class TestRunner_Scheme_AssertionLib extends Scheme_Lib_Abstract {
                 Scheme_Utils::mkList(new Scheme_Symbol('equal?'), $args[0], $args[1])
             ),
             Scheme_Utils::mkList(new Scheme_Symbol('error!'),
-                new Scheme_String("Expected " . $args[0]->toString() . " but got " . $args[1]->toString())
+                new Scheme_String("Expected " . $args[1]->toString() . " to yield " . $args[0]->toString())
             )
         ));
     }
