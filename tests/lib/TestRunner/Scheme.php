@@ -20,8 +20,10 @@ class TestRunner_Scheme extends TestRunner_Php {
         $this->bindLibs($rootEnv);
         
         try {
-            $expr = $parser->parse($code);
-            $interpreter->evaluate($rootEnv, $expr);
+            $stmts = $parser->parseToplevelStatements($code);
+            foreach ($stmts as $stmt) {
+                $interpreter->evaluate($rootEnv, $stmt);
+            }
         } catch (Exception $ex) {
             $this->reporter->addFailure('TestRunner_Scheme', $testName, $ex);
         }
