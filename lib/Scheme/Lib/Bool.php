@@ -26,6 +26,10 @@ class Scheme_Lib_Bool extends Scheme_Lib_Abstract {
                     $left instanceof Scheme_Symbol) {
                     $result = $left->value == $right->value;
                 } elseif ($left instanceof Scheme_Pair) {
+                    if (!$this->isTruthy($this->isEqual(array($left->car, $right->car)))) {
+                        $result = false;
+                        break;
+                    }
                     $left = $left->cdr;
                     $right = $right->cdr;
                 } elseif ($left instanceof Scheme_Null) {
