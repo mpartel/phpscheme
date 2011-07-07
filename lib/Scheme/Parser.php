@@ -1,5 +1,9 @@
 <?php
 class Scheme_Parser {
+    public function parseToplevelStatements($input) {
+        return $this->parse("(" . $input . ")")->listToArray();
+    }
+    
     public function parse($input) {
         $input = trim($input);
         $input = preg_replace("/[\t\n]+/", " ", $input);

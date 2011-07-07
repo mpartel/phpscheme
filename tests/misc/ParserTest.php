@@ -20,6 +20,15 @@ class ParserTest extends TestCase {
         $this->assertParsesAs("'(1 2 3)", "(quote (1 2 3))");
     }
     
+    public function testParsingToplevelStatements() {
+        $parser = new Scheme_Parser();
+        $result = $parser->parseToplevelStatements('(+ 1 2) (+ 3 4)');
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals('(+ 1 2)', $result[0]->toString());
+        $this->assertEquals('(+ 3 4)', $result[1]->toString());
+    }
+    
     private function assertParsesAsSame($s) {
         $this->assertParsesAs($s, $s);
     }
