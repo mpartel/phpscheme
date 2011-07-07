@@ -19,9 +19,8 @@ class TestRunner_Scheme extends TestRunner_Php {
         $rootEnv = $interpreter->createEnv();
         $this->bindLibs($rootEnv);
         
-        $expr = $parser->parse($code);
-        
         try {
+            $expr = $parser->parse($code);
             $interpreter->evaluate($rootEnv, $expr);
         } catch (Exception $ex) {
             $this->reporter->addFailure('TestRunner_Scheme', $testName, $ex);
